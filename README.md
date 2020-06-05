@@ -16,7 +16,7 @@ _The purpose of this project is to create a C# web application and employ databa
 ```
 cd Desktop
 git clone https://github.com/.git
-cd BlockBuster (or the file name you created for the main directory of the download)
+cd Pierres-Treats (or the file name you created for the main directory of the download)
 ```
 3. To view the downloaded files, open them in a text editor or IDE of your choice.
 * if you have VSCode for example, when your terminal is within the main project directory you can open all of the files with the command:
@@ -61,10 +61,10 @@ dotnet run
 3. Paste the following in the query section to create the database:
 
 ```
-CREATE DATABASE `blockbuster`;
+CREATE DATABASE `pieeres_treats`;
 
-USE `blockbuster`;
-w
+USE `pieeres_treats`;
+
 CREATE TABLE `flavors` (
   `FlavorId` int(11) NOT NULL AUTO_INCREMENT,
   `TreatId` int(11) NOT NULL DEFAULT '0',
@@ -75,7 +75,7 @@ CREATE TABLE `flavors` (
 CREATE TABLE `treats` (
   `TreatId` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`DirectorId`)
+  PRIMARY KEY (`TreatId`)
 );
 
 ```
@@ -129,4 +129,4 @@ N/A at the moment
 
 This software is licensed under the MIT license.
 
-Copyright © 2020 **Brevin Cronk_**
+Copyright © 2020 **_Brevin Cronk_**
