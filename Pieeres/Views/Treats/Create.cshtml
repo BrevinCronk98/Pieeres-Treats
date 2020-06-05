@@ -1,0 +1,17 @@
+@{
+    Layout = "_Layout";
+}
+
+@model PieeresTreats.Models.Treat
+
+<h2> Add a new Treat!!</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => Model.Name)
+    @Html.TextBoxFor(model => model.Name)
+    <input type="submit" value="Add" />
+}
+
+<p>@Html.ActionLink("Show All Treats", "Index")</p>
+<p>@Html.ActionLink("Home Page", "Index", "Home")

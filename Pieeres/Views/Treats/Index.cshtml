@@ -1,0 +1,21 @@
+@{
+    Layout ="_Layout";
+}
+
+@using PieeresTreats.Models
+@model List<PieeresTreats.Models.Treat>
+
+<h1> Treats</h1>
+
+@if(@Model.Count == 0)
+{
+    <p>Sign In to Add a Treat to Get Your List Going!</p>
+}
+
+@foreach (Treat treat in Model)
+{
+    <p>@Html.ActionLink($"{treat.Name}", "Details", new { id= treat.TreatId })</p>
+}
+
+<p>@Html.ActionLink("Add a new Treat", "Create")</p>
+<p>@Html.ActionLink("Back to Home Page", "Index", "Home")</p>

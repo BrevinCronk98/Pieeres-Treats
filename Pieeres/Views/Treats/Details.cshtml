@@ -1,0 +1,27 @@
+@{
+    Layout ="Layout";
+}
+
+@model PieeresTreats.Models.Treat
+
+@using PieeresTreats.Models
+
+<h2> Treat Details</h2>
+
+<h3>@Html.DisplayFor(model => model.Name)</h3>
+
+@if(@Model.Flavors.Count == 0)
+{
+    <p> There are no Flavors yet!! Add some if you are signed in!.</p>
+}
+else
+{
+    <h4>Flavors that this treat is available in!</h4>
+    @foreach(var join in Model.Flavors)
+    {
+        <p>@join.Flavor.Name</p>
+    }
+}
+
+<p>@Html.ActionLink("Add a Flavor", "Create", "Treats")</p>
+<p>@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId })</p>
