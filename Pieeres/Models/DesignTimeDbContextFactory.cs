@@ -20,7 +20,7 @@ namespace PieeresTreats.Models
 
                 builder.UseMySql(connectionString);
 
-                return new PieeresTreatsContext(builder.Options)
+                return new PieeresTreatsContext(builder.Options);
         }
     }
 }
