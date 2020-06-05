@@ -72,7 +72,7 @@ namespace PieeresTreats.Controllers
         {
             if(TreatId != 0)
             {
-                _db.TreatFlavors.Add(new TreatFlavor() {TreatId = TreatId, FlavorId = FlavorId});
+                _db.TreatFlavors.Add(new TreatFlavor() {TreatId = TreatId, FlavorId = flavor.FlavorId});
             }
             _db.Entry(flavor).State = EntityState.Modified;
             _db.SaveChanges();
@@ -82,7 +82,7 @@ namespace PieeresTreats.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult AddTreat(int id)
         {
-            var thisFlavor = _db.Flavors.FirstOrDefault(flavor = flavor.FlavorId == id);
+            var thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
             ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
             return View(thisFlavor);
         }
@@ -92,7 +92,7 @@ namespace PieeresTreats.Controllers
         {
             if(TreatId != 0)
             {
-                _db.TreatFlavors.Add(new TreatFlavor() {TreatId = TreatId, FlavorId = FlavorId});
+                _db.TreatFlavors.Add(new TreatFlavor() {TreatId = TreatId, FlavorId = flavor.FlavorId});
             }
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -106,7 +106,7 @@ namespace PieeresTreats.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed()
+        public ActionResult DeleteConfirmed(int id)
         {
             var thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
             _db.Flavors.Remove(thisFlavor);
@@ -117,7 +117,7 @@ namespace PieeresTreats.Controllers
         [HttpPost]
         public ActionResult DeleteTreat(int joinId)
         {
-            var joinentry = _db.TreatFlavors.FirstOrDefault(entry => entry.TreatFlavorId == joinId);
+            var joinEntry = _db.TreatFlavors.FirstOrDefault(entry => entry.TreatFlavorId == joinId);
             _db.TreatFlavors.Remove(joinEntry);
             _db.SaveChanges();
             return RedirectToAction("Index");

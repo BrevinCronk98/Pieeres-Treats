@@ -1,0 +1,40 @@
+body {
+	background: url(../img/pic.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.box {
+	background: rgba(247, 246, 243, 0.85);
+	border-radius: 3px;
+	border: 8px solid rgb(30, 40, 45);
+	padding: 20px;
+	text-align: center;
+	margin: 20%;
+}
+
+.nav {
+	top: 0px;
+	list-style-type: none;
+	margin: 0;
+	padding-left: 10%;
+	width: 100%;
+	opacity: 0.8;
+	background-color: black;
+	position: fixed;
+	overflow: auto;
+	display: inline;
+}
+
+.nav li {
+	float: left;
+}
+
+.hello {
+	opacity: 0.9;
+	color: white;
+	float: right;
+}
