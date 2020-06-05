@@ -1,0 +1,21 @@
+@{
+  Layout ="_Layout";
+}
+
+@using PieeresTreats.ViewModels
+
+@model LoginViewModel
+
+
+<h2>Log in With Your Account</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(m => m.UserName)
+  @Html.TextBoxFor(m => m.UserName)
+  <br>
+  @Html.LabelFor(m => m.Password)
+  @Html.PasswordFor(m => m.Password)
+  <input type="submit" value="Login" class="btn btn-default" />
+}

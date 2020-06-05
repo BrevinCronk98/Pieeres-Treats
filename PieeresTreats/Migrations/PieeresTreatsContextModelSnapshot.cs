@@ -285,7 +285,7 @@ namespace PieeresTreats.Migrations
 
             modelBuilder.Entity("PieeresTreats.Models.TreatFlavor", b =>
                 {
-                    b.HasOne("PieeresTreats.Models.Flavor", "flavor")
+                    b.HasOne("PieeresTreats.Models.Flavor", "Flavor")
                         .WithMany("Treats")
                         .HasForeignKey("FlavorId")
                         .OnDelete(DeleteBehavior.Cascade);

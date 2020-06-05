@@ -13,10 +13,11 @@ namespace PieeresTreats.Controllers
     public class TreatsController : Controller
     {
         private readonly PieeresTreatsContext _db;
-
-        public TreatsController(PieeresTreatsContext db)
+       
+        public TreatsController( PieeresTreatsContext db)
         {
             _db = db;
+           
         }
 
         public ActionResult Index()
@@ -25,6 +26,7 @@ namespace PieeresTreats.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -47,7 +49,9 @@ namespace PieeresTreats.Controllers
                 .FirstOrDefault(treat => treat.TreatId == id);
             return View(thisTreat);
         }
-
+        
+        
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
@@ -62,6 +66,8 @@ namespace PieeresTreats.Controllers
             return RedirectToAction("Index");
         }
 
+
+        [Authorize]
         public ActionResult Delete(int id)
         {
             var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);

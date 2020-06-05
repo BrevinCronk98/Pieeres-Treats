@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace PieeresTreats.Controllers
+namespace Pieeres.Controllers
 {
     public class HomeController : Controller
     {
