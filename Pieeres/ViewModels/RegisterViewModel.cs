@@ -1,4 +1,4 @@
-using System.ComponetnModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace PieeresTreats.ViewModels
 {
@@ -11,7 +11,7 @@ namespace PieeresTreats.ViewModels
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public string UserName { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

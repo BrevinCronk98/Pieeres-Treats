@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace PieeresTreats.Controllers
 {
-    public class HomeController : Controllers
+    public class HomeController : Controller
     {
         public ActionResult Index()
         {

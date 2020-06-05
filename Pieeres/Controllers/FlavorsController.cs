@@ -12,7 +12,7 @@ using System;
 
 namespace PieeresTreats.Controllers
 {
-    public class FlavorsController : Controllers
+    public class FlavorsController : Controller
     {
         private readonly PieeresTreatsContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -40,13 +40,13 @@ namespace PieeresTreats.Controllers
         public async Task<ActionResult> Create(Flavor flavor, int TreatId)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var currentUser = await _userManager.FindByIdAsyn(userId);
+            var currentUser = await _userManager.FindByIdAsync(userId);
             _db.Flavors.Add(flavor);
             if(TreatId != 0)
             {
                 _db.TreatFlavors.Add(new TreatFlavor() {TreatId = TreatId, FlavorId = flavor.FlavorId});
             }
-            _db.SaveChanges()
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 

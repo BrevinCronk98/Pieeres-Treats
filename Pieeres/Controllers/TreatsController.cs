@@ -12,7 +12,7 @@ namespace PieeresTreats.Controllers
 {
     public class TreatsController : Controller
     {
-        private readonly PieeresTreatsContext _db
+        private readonly PieeresTreatsContext _db;
 
         public TreatsController(PieeresTreatsContext db)
         {
@@ -48,9 +48,9 @@ namespace PieeresTreats.Controllers
             return View(thisTreat);
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
-            var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id)
+            var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
             return View(thisTreat);
         }
 
@@ -58,7 +58,7 @@ namespace PieeresTreats.Controllers
         public ActionResult Edit(Treat treat)
         {
             _db.Entry(treat).State= EntityState.Modified;
-            _db.SaveChanges()
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 

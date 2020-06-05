@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pieeres Sweet and Savory Treats</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="~/css/styles.css">
+  </head>
+  <body>
+    <ul class="nav">
+      <li>@Html.ActionLink("Home", "Index", "Home")</li>
+      <li>@Html.ActionLink("Treats", "Index", "Treats")</li>
+      <li>@Html.ActionLink("Flavors", "Index", "Flavors")</li>
+      @if (User.Identity.IsAuthenticated)
+      {
+        <li class="hello">Hello @User.Identity.Name!</li>
+        @using (Html.BeginForm("LogOff", "Account"))
+        {
+          <input type="submit" value="Log out"/>
+        }
+      }
+      else
+      {
+        <li class="hello">Not Signed In</li>
+      }
+    </ul>
+    <div class="box">
+      @RenderBody()
+    </div>
+  </body>
+</html>

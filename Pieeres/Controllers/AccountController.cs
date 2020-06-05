@@ -8,14 +8,14 @@ namespace PieeresTreats.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly BlockBusterContext _db;
+        private readonly PieeresTreatsContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
         private readonly RoleManager<IdentityRole> _roleManager;
 
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, PieereTreatsContext db)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, PieeresTreatsContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -34,9 +34,9 @@ namespace PieeresTreats.Controllers
         }
 
         [HttpPost]
-        public async Tast<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            var user = new ApplicationUser { Email = model.Email, UserName = model.UserName}
+            var user = new ApplicationUser { Email = model.Email, UserName = model.UserName};
             var role = new IdentityRole();
             role.Name = "User";
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
