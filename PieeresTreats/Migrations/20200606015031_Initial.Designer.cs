@@ -9,8 +9,8 @@ using PieeresTreats.Models;
 namespace PieeresTreats.Migrations
 {
     [DbContext(typeof(PieeresTreatsContext))]
-    [Migration("20200605224433_Update")]
-    partial class Update
+    [Migration("20200606015031_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,14 +1,9 @@
 using PieeresTreats.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System;
 
 namespace PieeresTreats.Controllers
 {
@@ -16,39 +11,32 @@ namespace PieeresTreats.Controllers
     public class FlavorsController : Controller
     {
         private readonly PieeresTreatsContext _db;
-        private readonly UserManager<ApplicationUser> _userManager;
+        
 
-        public FlavorsController(UserManager<ApplicationUser> userManager, PieeresTreatsContext db)
+        public FlavorsController(PieeresTreatsContext db)
         {
-            _userManager = userManager;
             _db = db;
         }
 
-        public async Task<ActionResult> Index()
+        [HttpGet]
+        public ActionResult Index()
         {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var currentUser = await _userManager.FindByIdAsync(userId);
-            var userFlavors = _db.Flavors.Where(entry => entry.User.Id == currentUser.Id);
-            return View(userFlavors);
+            List<Flavor> model = _db.Flavors.ToList();
+            return View(model);
         }
 
        [Authorize]
+       [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
+            //  ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(Flavor flavor, int TreatId)
-        {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var currentUser = await _userManager.FindByIdAsync(userId);
+        public ActionResult Create(Flavor flavor)
+        { 
             _db.Flavors.Add(flavor);
-            if(TreatId != 0)
-            {
-                _db.TreatFlavors.Add(new TreatFlavor() {TreatId = TreatId, FlavorId = flavor.FlavorId});
-            }
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -66,37 +54,13 @@ namespace PieeresTreats.Controllers
         public ActionResult Edit(int id)
         {
             var thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
-            ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
             return View(thisFlavor);
         }
 
         [HttpPost]
         public ActionResult Edit(Flavor flavor, int TreatId)
         {
-            if(TreatId != 0)
-            {
-                _db.TreatFlavors.Add(new TreatFlavor() {TreatId = TreatId, FlavorId = flavor.FlavorId});
-            }
             _db.Entry(flavor).State = EntityState.Modified;
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-       [Authorize]
-        public ActionResult AddTreat(int id)
-        {
-            var thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
-            ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
-            return View(thisFlavor);
-        }
-
-        [HttpPost]
-        public ActionResult AddTreat(Flavor flavor, int TreatId)
-        {
-            if(TreatId != 0)
-            {
-                _db.TreatFlavors.Add(new TreatFlavor() {TreatId = TreatId, FlavorId = flavor.FlavorId});
-            }
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -115,17 +79,6 @@ namespace PieeresTreats.Controllers
             _db.Flavors.Remove(thisFlavor);
             _db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult DeleteTreat(int joinId)
-        {
-            var joinEntry = _db.TreatFlavors.FirstOrDefault(entry => entry.TreatFlavorId == joinId);
-            _db.TreatFlavors.Remove(joinEntry);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        
+        } 
     }
 }

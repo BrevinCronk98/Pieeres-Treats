@@ -9,8 +9,8 @@ using PieeresTreats.Models;
 namespace PieeresTreats.Migrations
 {
     [DbContext(typeof(PieeresTreatsContext))]
-    [Migration("20200605162435_Initial")]
-    partial class Initial
+    [Migration("20200606020116_update")]
+    partial class update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -287,7 +287,7 @@ namespace PieeresTreats.Migrations
 
             modelBuilder.Entity("PieeresTreats.Models.TreatFlavor", b =>
                 {
-                    b.HasOne("PieeresTreats.Models.Flavor", "flavor")
+                    b.HasOne("PieeresTreats.Models.Flavor", "Flavor")
                         .WithMany("Treats")
                         .HasForeignKey("FlavorId")
                         .OnDelete(DeleteBehavior.Cascade);

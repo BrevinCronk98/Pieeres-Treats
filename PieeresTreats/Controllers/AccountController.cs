@@ -37,10 +37,7 @@ namespace PieeresTreats.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             var user = new ApplicationUser { Email = model.Email, UserName = model.UserName};
-            var role = new IdentityRole();
-            role.Name = "User";
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-            IdentityResult roleResult = await _roleManager.CreateAsync(role);
             if(result.Succeeded)
             {
                 return RedirectToAction("Index");
@@ -51,6 +48,8 @@ namespace PieeresTreats.Controllers
             }
         }
 
+
+        [HttpGet]
         public ActionResult Login()
         {
             return View();

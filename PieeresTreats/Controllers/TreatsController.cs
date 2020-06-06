@@ -1,13 +1,10 @@
 using PieeresTreats.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
 namespace PieeresTreats.Controllers
 {
     public class TreatsController : Controller
@@ -17,7 +14,6 @@ namespace PieeresTreats.Controllers
         public TreatsController( PieeresTreatsContext db)
         {
             _db = db;
-           
         }
 
         public ActionResult Index()
@@ -29,14 +25,19 @@ namespace PieeresTreats.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
             return View();
         }
 
 
         [HttpPost]
-        public ActionResult Create(Treat treat)
+        public ActionResult Create(Treat treat, int FlavorId)
         {
             _db.Treats.Add(treat);
+            if(FlavorId != 0)
+            {
+                _db.TreatFlavors.Add(new TreatFlavor() {FlavorId = FlavorId, TreatId = treat.TreatId});
+            }
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -55,15 +56,20 @@ namespace PieeresTreats.Controllers
         public ActionResult Edit(int id)
         {
             var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+            ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
             return View(thisTreat);
         }
 
         [HttpPost]
-        public ActionResult Edit(Treat treat)
+        public ActionResult Edit(Treat treat, int FlavorId)
         {
+            if(FlavorId != 0)
+            {
+                _db.TreatFlavors.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId});
+            }
             _db.Entry(treat).State= EntityState.Modified;
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new {id = treat.TreatId});
         }
 
 
@@ -81,6 +87,25 @@ namespace PieeresTreats.Controllers
             _db.Treats.Remove(thisTreat);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public ActionResult AddFlavor(int id)
+        {
+            var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+            ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
+            return View(thisTreat);
+        }
+
+        [HttpPost]
+        public ActionResult AddFlavor(Treat Treat, int FlavorId)
+        {
+            if(FlavorId != 0)
+            {
+                _db.TreatFlavors.Add(new TreatFlavor() {FlavorId = FlavorId, TreatId = Treat.TreatId});
+            }
+            _db.SaveChanges();
+            return RedirectToAction("Details", new { id = Treat.TreatId });
         }
     }
 }
