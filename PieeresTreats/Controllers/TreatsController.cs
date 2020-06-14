@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+
+
 namespace PieeresTreats.Controllers
 {
     public class TreatsController : Controller
@@ -104,7 +106,6 @@ namespace PieeresTreats.Controllers
             {
                 _db.TreatFlavors.Add(new TreatFlavor() {FlavorId = FlavorId, TreatId = treat.TreatId});
             }
-            _db.Entry(treat).Collection(r => r.Flavors).IsModified = true;
             _db.SaveChanges();
             return RedirectToAction("Index");
         }

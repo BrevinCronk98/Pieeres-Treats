@@ -1,9 +1,12 @@
 using PieeresTreats.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+
+
 
 namespace PieeresTreats.Controllers
 {
@@ -80,5 +83,23 @@ namespace PieeresTreats.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         } 
+
+         [Authorize]
+        public ActionResult AddFlavor(int id)
+        {
+            var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
+            ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
+            return View(thisTreat);
+        }
+        [HttpPost]
+        public ActionResult AddTreat(Flavor flavor, int TreatId)
+        {
+            if(TreatId != 0)
+            {
+                _db.TreatFlavors.Add(new TreatFlavor() {TreatId = TreatId, FlavorId = flavor.FlavorId});
+            }
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

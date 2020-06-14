@@ -3,6 +3,13 @@ using Microsoft.AspNetCore.Identity;
 using PieeresTreats.Models;
 using System.Threading.Tasks;
 using PieeresTreats.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+
+
 
 namespace PieeresTreats.Controllers
 {
