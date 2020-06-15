@@ -17,18 +17,19 @@
 }
 else
 {
-    <h4>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h4>
+    <h3> Available Treats for @Html.DisplayFor(model => model.Name)</h3>
+   
     @foreach(var join in Model.Treats)
     {
         @using (Html.BeginForm("DeleteTreat","Flavors"))
         {
-            @Html.Hidden("joinId", @join.TreatFlavorId)
-            <input type="submit" value="Delete"/>
+           <p>@Html.ActionLink($"{join.Treat.Name}", "Details", "Treats", new { id = join.Treat.TreatId })</p>
         }
     }
-    <p>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</p>
+    
 }
 
+<h1>Links</h1>
 <p>@Html.ActionLink("Back To List", "Index")</p>
 <p>@Html.ActionLink("Edit Flavor", "Edit", new { id = Model.FlavorId})</p>
 <p>@Html.ActionLink("Delete Flavor", "Delete", new { id = Model.FlavorId})</p>
