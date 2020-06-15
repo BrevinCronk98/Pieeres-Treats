@@ -6,11 +6,9 @@
 @model PieeresTreats.Models.Flavor
 
 
-<h2>Movie Details</h2>
+<h2>Flavors</h2>
 <hr />
 
-
-<h4>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h4>
 
 
 @if(@Model.Treats.Count == 0)
@@ -22,7 +20,6 @@ else
     <h4>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h4>
     @foreach(var join in Model.Treats)
     {
-        <p>join.Treat.Name</p>
         @using (Html.BeginForm("DeleteTreat","Flavors"))
         {
             @Html.Hidden("joinId", @join.TreatFlavorId)
@@ -35,4 +32,4 @@ else
 <p>@Html.ActionLink("Back To List", "Index")</p>
 <p>@Html.ActionLink("Edit Flavor", "Edit", new { id = Model.FlavorId})</p>
 <p>@Html.ActionLink("Delete Flavor", "Delete", new { id = Model.FlavorId})</p>
-<p>@Html.ActionLink("Add a Treat", "AddFlavor", "Treats", new { id = Model.FlavorId})</p>
+<p>@Html.ActionLink("Add a Treat", "AddTreat", new { id = Model.FlavorId})</p>

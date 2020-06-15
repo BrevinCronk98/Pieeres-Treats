@@ -85,11 +85,11 @@ namespace PieeresTreats.Controllers
         } 
 
          [Authorize]
-        public ActionResult AddFlavor(int id)
+        public ActionResult AddTreat(int id)
         {
-            var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
-            ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
-            return View(thisTreat);
+            var thisFlavor = _db.Flavors.FirstOrDefault(flavors=> flavors.FlavorId == id);
+            ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
+            return View(thisFlavor);
         }
         [HttpPost]
         public ActionResult AddTreat(Flavor flavor, int TreatId)
