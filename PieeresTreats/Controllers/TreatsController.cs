@@ -69,9 +69,9 @@ namespace PieeresTreats.Controllers
             {
                 _db.TreatFlavors.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId});
             }
-            _db.Entry(treat).State= EntityState.Modified;
+            _db.Entry(treat).State = EntityState.Modified;
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new { id = treat.TreatId});
         }
 
 

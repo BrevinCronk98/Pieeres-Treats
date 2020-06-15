@@ -32,7 +32,7 @@ namespace PieeresTreats.Controllers
        [HttpGet]
         public ActionResult Create()
         {
-            //  ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+            ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
             return View();
         }
 

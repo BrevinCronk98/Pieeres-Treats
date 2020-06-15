@@ -14,6 +14,6 @@ namespace PieeresTreats.Models
         
 
         public virtual ApplicationUser User { get; set; }
-        public  ICollection<TreatFlavor> Treats {get; }
+        public virtual  ICollection<TreatFlavor> Treats {get; }
     }
 }
